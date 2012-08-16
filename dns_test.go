@@ -21,7 +21,7 @@ func TestPackUnpack(t *testing.T) {
 	key.PublicKey = "AwEAAaHIwpx3w4VHKi6i1LHnTaWeHCL154Jug0Rtc9ji5qwPXpBo6A5sRv7cSsPQKPIwxLpyCrbJ4mr2L0EPOdvP6z6YfljK2ZmTbogU9aSU2fiq/4wjxbdkLyoDVgtO+JsxNN4bjr4WcWhsmk1Hg93FV9ZpkWb0Tbad8DFqNDzr//kZ"
 
 	out.Answer[0] = key
-	msg, err := out.Pack()
+	msg, err := out.Pack(nil)
 	if err != nil {
 		t.Log("Failed to pack msg with DNSKEY")
 		t.Fail()
@@ -39,7 +39,7 @@ func TestPackUnpack(t *testing.T) {
 	sig.Hdr = RR_Header{Name: "miek.nl.", Rrtype: TypeRRSIG, Class: ClassINET, Ttl: 3600}
 
 	out.Answer[0] = sig
-	msg, err = out.Pack()
+	msg, err = out.Pack(nil)
 	if err != nil {
 		t.Log("Failed to pack msg with RRSIG")
 		t.Fail()
@@ -66,7 +66,7 @@ func TestPackUnpack2(t *testing.T) {
 
 	m.Extra[0] = x
 	m.Answer[0] = rr
-	_, err := m.Pack()
+	_, err := m.Pack(nil)
 	if err != nil {
 		t.Log("Packing failed")
 		t.Fail()
@@ -116,7 +116,7 @@ func TestPack(t *testing.T) {
 			t.Fail()
 			continue
 		}
-		if _, err := m.Pack(); err != nil {
+		if _, err := m.Pack(nil); err != nil {
 			t.Log("Packing failed")
 			t.Fail()
 		}

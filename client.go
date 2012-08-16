@@ -172,7 +172,7 @@ func (w *reply) send(m *Msg) (err error) {
 		out, mac, err = TsigGenerate(m, w.client.TsigSecret[name], w.tsigRequestMAC, w.tsigTimersOnly)
 		w.tsigRequestMAC = mac
 	} else {
-		out, err = m.Pack()
+		out, err = m.Pack(nil)
 	}
 	if err != nil {
 		return err

@@ -42,8 +42,8 @@ type response struct {
 	tsigTimersOnly bool
 	tsigRequestMAC string
 	tsigSecret     map[string]string // the tsig secrets
-	udp           *net.UDPConn      // i/o connection if UDP was used
-	tcp           *net.TCPConn      // i/o connection if TCP was used
+	udp            *net.UDPConn      // i/o connection if UDP was used
+	tcp            *net.TCPConn      // i/o connection if TCP was used
 	remoteAddr     net.Addr          // address of the client
 }
 
@@ -437,7 +437,7 @@ func (w *response) WriteMsg(m *Msg) (err error) {
 			return err
 		}
 	}
-	data, err = m.Pack()
+	data, err = m.Pack(nil)
 	if err != nil {
 		return err
 	}
