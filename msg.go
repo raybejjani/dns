@@ -1351,7 +1351,8 @@ func (dns *Msg) Unpack(msg []byte) (err error) {
 	if off != len(msg) {
 		// TODO(mg) remove eventually
 		// Err: extra bytes in packet
-		println("dns: extra bytes in dns packet", off, "<", len(msg))
+		//println("dns: extra bytes in dns packet", off, "<", len(msg))
+		return fmt.Errorf("extra bytes in dns packet %d !=  %d", off, len(msg))
 	}
 	return nil
 }
